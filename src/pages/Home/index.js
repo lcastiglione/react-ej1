@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ListOfGifs from "../../components/ListOfGifs";
-import Category from "../../components/Category";
+import TrendingSearches from "../../components/TrendingSearches";
 import { useGifs } from "../../hooks/useGifs";
 
 const POPULAR_GIFS = ["Matrix", "Argentina", "Python", "Web"];
@@ -37,8 +37,7 @@ export default function Home() {
           <ListOfGifs gifs={gifs} />
         </div>
         <div className="App-category">
-          <Category name="Categorias populares" options={POPULAR_GIFS} />
-          <Category name="Mascotas" options={["Perros", "Gatos", "Hamster"]} />
+          <TrendingSearches />
         </div>
       </div>
     </>

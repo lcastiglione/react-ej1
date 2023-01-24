@@ -2,7 +2,7 @@
 const body = {
   api_key: process.env.REACT_APP_API_GIPHY_KEY,
   q: "", // Palabra a buscar
-  limit: "15", //Cantidad de respuestas a devolver
+  limit: "25", //Cantidad de respuestas a devolver
   offset: "0",
   rating: "g", // Calificación de edad
   lang: "en", //Idioma
