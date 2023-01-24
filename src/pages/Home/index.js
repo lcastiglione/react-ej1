@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import { Link, useNavigate, redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ListOfGifs from "../../components/ListOfGifs";
+import getGifs from "../../services/getGifs";
 
 const POPULAR_GIFS = ["Matrix", "Argentina", "Python", "Web"];
 
 export default function Home() {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [gifs, setGifs] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    getGifs({ keyword: "Python" }).then((gifs) => {
+      setGifs(gifs);
+      setLoading(false);
+    });
+  }, [keyword]);
 
   const hundleSubmit = (evt) => {
     evt.preventDefault();
@@ -27,6 +39,8 @@ export default function Home() {
         />
         <button>Buscar</button>
       </form>
+      <h3 className="App-title">Última búsqueda</h3>
+      <ListOfGifs gifs={gifs} />
       <h3 className="App-title">Los Gifs más populares</h3>
       <ul>
         {POPULAR_GIFS.map((popularGif) => (
