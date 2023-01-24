@@ -3,18 +3,28 @@ import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import Detail from "./pages/Detail";
 import "./App.css";
+import StaticContext from "./contexts/StaticContext";
+import { GifsContextProvider } from "./contexts/GifsContext";
 
 export default function App() {
   return (
-    <div className="App">
-      <section className="App-content">
-        <h1>App</h1>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search/:keyword" element={<SearchResults />} />
-          <Route path="/gif/:id" element={<Detail />} />
-        </Routes>
-      </section>
-    </div>
+    <StaticContext.Provider
+      value={{
+        name: " Test Context",
+      }}
+    >
+      <div className="App">
+        <section className="App-content">
+          <h1>App</h1>
+          <GifsContextProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search/:keyword" element={<SearchResults />} />
+              <Route path="/gif/:id" element={<Detail />} />
+            </Routes>
+          </GifsContextProvider>
+        </section>
+      </div>
+    </StaticContext.Provider>
   );
 }
