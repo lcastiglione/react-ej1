@@ -5,9 +5,11 @@ import GifsContext from "../contexts/GifsContext";
 export function useGifs({ keyword } = { keyword: null }) {
   const [loading, setLoading] = useState(false);
   const { gifs, setGifs } = useContext(GifsContext);
+
   // Se obtiene la keyword. Si es null, se obtiene la última guardada en el storage y si no hay nada guardado, se busca 'random'
   const keywordToUse =
     keyword || localStorage.getItem("lastKeyword") || "random";
+
   useEffect(() => {
     setLoading(true);
     getGifs({ keyword: keywordToUse }).then((gifs) => {
