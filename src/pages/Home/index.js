@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ListOfGifs from "../../components/ListOfGifs";
+import Category from "../../components/Category";
 import { useGifs } from "../../hooks/useGifs";
 
 const POPULAR_GIFS = ["Matrix", "Argentina", "Python", "Web"];
@@ -22,24 +23,24 @@ export default function Home() {
   return (
     <>
       <form onSubmit={hundleSubmit}>
+        <button>Buscar</button>
         <input
           placeholder="Buscar gif..."
           onChange={hundleChange}
           type="text"
           value={keyword}
         />
-        <button>Buscar</button>
       </form>
-      <h3 className="App-title">Última búsqueda</h3>
-      <ListOfGifs gifs={gifs} />
-      <h3 className="App-title">Los Gifs más populares</h3>
-      <ul>
-        {POPULAR_GIFS.map((popularGif) => (
-          <li key={popularGif}>
-            <Link to={`/search/${popularGif}`}>Gifs de {popularGif}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className="App-main">
+        <div className="App-results">
+          <h3 className="App-title">Última búsqueda</h3>
+          <ListOfGifs gifs={gifs} />
+        </div>
+        <div className="App-category">
+          <Category name="Categorias populares" options={POPULAR_GIFS} />
+          <Category name="Mascotas" options={["Perros", "Gatos", "Hamster"]} />
+        </div>
+      </div>
     </>
   );
 }
