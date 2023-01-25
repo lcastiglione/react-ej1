@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ListOfGifs from "../../components/ListOfGifs";
-import TrendingSearches from "../../components/TrendingSearches";
-import { useGifs } from "../../hooks/useGifs";
-
-const POPULAR_GIFS = ["Matrix", "Argentina", "Python", "Web"];
+import ListOfGifs from "components/ListOfGifs";
+import TrendingSearches from "components/TrendingSearches";
+import { useGifs } from "hooks/useGifs";
 
 export default function Home() {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
-  const { loading, gifs } = useGifs();
+  console.log("Call gifs");
+  const { gifs } = useGifs();
 
   const hundleSubmit = (evt) => {
     evt.preventDefault();

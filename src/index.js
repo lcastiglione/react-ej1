@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  //Para evitar doble carga comentar React.StrictMode. Quitar comentario en producción
   <React.StrictMode>
     <BrowserRouter>
       <App />
