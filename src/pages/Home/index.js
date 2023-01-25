@@ -7,7 +7,6 @@ import { useGifs } from "hooks/useGifs";
 export default function Home() {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
-  console.log("Call gifs");
   const { gifs } = useGifs();
 
   const hundleSubmit = (evt) => {
