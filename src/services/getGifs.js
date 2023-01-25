@@ -2,8 +2,8 @@
 const body = {
   api_key: process.env.REACT_APP_API_GIPHY_KEY,
   q: "", // Palabra a buscar
-  limit: "15", //Cantidad de respuestas a devolver
-  offset: "0",
+  limit: "5", //Cantidad de respuestas a devolver
+  offset: 0,
   rating: "g", // Calificación de edad
   lang: "en", //Idioma
 };
@@ -32,8 +32,10 @@ const fromApiResponseToGifs = (response) => {
   return [];
 };
 
-export default function getGifs({ keyword = "" } = {}) {
-  body["q"] = keyword ? keyword : body["q"];
+export default function getGifs({ keyword = "", limit = 5, page = 0 } = {}) {
+  body["q"] = keyword;
+  body["limit"] = limit;
+  body["offset"] = page * limit;
   return fetch(
     `${process.env.REACT_APP_API_GIPHY_URL}?${objToQueryString(body)}`
   )

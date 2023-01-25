@@ -7,7 +7,11 @@ import { useParams } from "react-router-dom";
 
 export default function SearchResults() {
   const { keyword } = useParams();
-  const { loading, gifs } = useGifs({ keyword });
+  const { loading, gifs, setPage } = useGifs({ keyword });
+
+  const handleNexPage = () => {
+    setPage((prevPages) => prevPages + 1);
+  };
 
   return (
     <>
@@ -19,6 +23,8 @@ export default function SearchResults() {
           <ListOfGifs gifs={gifs} />
         </>
       )}
+      <br />
+      <button onClick={handleNexPage}>Pág. siguiente</button>
     </>
   );
 }
