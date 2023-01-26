@@ -1,4 +1,5 @@
-﻿// Parámetros para la consulta a la API de gifs
+﻿import { API_URL } from "./settings";
+// Parámetros para la consulta a la API de gifs
 const body = {
   api_key: process.env.REACT_APP_API_GIPHY_KEY,
   q: "", // Palabra a buscar
@@ -36,9 +37,7 @@ export default function getGifs({ keyword = "", limit = 5, page = 0 } = {}) {
   body["q"] = keyword;
   body["limit"] = limit;
   body["offset"] = page * limit;
-  return fetch(
-    `${process.env.REACT_APP_API_GIPHY_URL}?${objToQueryString(body)}`
-  )
+  return fetch(`${API_URL}/gifs/search?${objToQueryString(body)}`)
     .then((response) => response.json())
     .then(fromApiResponseToGifs);
 }

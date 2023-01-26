@@ -1,4 +1,4 @@
-﻿import { API_KEY, API_URL } from "./settings";
+﻿import { API_URL } from "./settings";
 
 const fromApiResponseToGifs = (response) => {
   const { data = [] } = response;
@@ -6,7 +6,9 @@ const fromApiResponseToGifs = (response) => {
 };
 
 export default function getTrendingTerms({ keyword = "" } = {}) {
-  return fetch(`${API_URL}/trending/searches?api_key=${API_KEY}`)
+  return fetch(
+    `${API_URL}/trending/searches?api_key=${process.env.REACT_APP_API_GIPHY_KEY}`
+  )
     .then((response) => response.json())
     .then(fromApiResponseToGifs);
 }
