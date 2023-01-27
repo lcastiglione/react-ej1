@@ -21,6 +21,7 @@ export default function App() {
             <GifsContextProvider>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/search/" element={<SearchResults />} />
                 <Route path="/search/:keyword" element={<SearchResults />} />
                 <Route path="/gif/:id" element={<Detail />} />
               </Routes>
