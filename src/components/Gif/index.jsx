@@ -2,7 +2,7 @@
 import "./gif.css";
 import { Link } from "react-router-dom";
 
-export default function Gif({ title, id, url }) {
+function Gif({ title, id, url }) {
   return (
     <div className="gif">
       <Link data-testid="gif" to={`/gif/${id}`} className="gif-link">
@@ -12,3 +12,7 @@ export default function Gif({ title, id, url }) {
     </div>
   );
 }
+
+export default React.memo(Gif, (prevProps, nextProps) => {
+  return prevProps.id === nextProps.id;
+});

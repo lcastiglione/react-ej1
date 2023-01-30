@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import Detail from "./pages/Detail";
-import "./App.css";
 import StaticContext from "./contexts/StaticContext";
 import { GifsContextProvider } from "./contexts/GifsContext";
 import { BrowserRouter } from "react-router-dom";
+
+import "./App.css";
 
 export default function App() {
   return (

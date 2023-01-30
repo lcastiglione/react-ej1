@@ -33,11 +33,17 @@ const fromApiResponseToGifs = (response) => {
   return [];
 };
 
-export default function getGifs({ keyword = "", limit = 5, page = 0 } = {}) {
+export default async function getGifs({
+  keyword = "",
+  limit = 5,
+  page = 0,
+} = {}) {
   body["q"] = keyword;
   body["limit"] = limit;
   body["offset"] = page * limit;
-  return fetch(`${API_URL}/gifs/search?${objToQueryString(body)}`)
-    .then((response) => response.json())
-    .then(fromApiResponseToGifs);
+  const response = await fetch(
+    `${API_URL}/gifs/search?${objToQueryString(body)}`
+  );
+  const response_1 = await response.json();
+  return fromApiResponseToGifs(response_1);
 }
