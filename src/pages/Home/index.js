@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import ListOfGifs from "components/ListOfGifs";
 import TrendingSearches from "components/TrendingSearches";
 import SearchForm from "components/SearchForm";
-import { useGifs } from "hooks/useGifs";
+import useGifs from "hooks/useGifs";
 
 export default function Home() {
   const { gifs } = useGifs();

@@ -1,18 +1,21 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Gif from "components/Gif";
-import useGlobalGifs from "hooks/useGlobalGifs";
+import useSingleGif from "hooks/useSingleGif";
+import Spinner from "components/Spinner";
 
 export default function Detail() {
   let { id } = useParams();
+  const { gif, isLoading, isError } = useSingleGif({ id });
 
-  const gifs = useGlobalGifs();
-  const gif = gifs.find((singleGif) => singleGif.id === id);
+  if (isLoading) return <Spinner />;
+  if (isError) return <Navigate to="/404" replace />;
+  if (!gif) return null;
 
   return (
     <>
       <h3 className="App-title">{gif.title}</h3>
-      <Gif {...gif} />;
+      <Gif {...gif} />
     </>
   );
 }

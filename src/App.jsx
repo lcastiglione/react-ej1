@@ -26,6 +26,7 @@ export default function App() {
                 <Route path="/search/" element={<SearchResults />} />
                 <Route path="/search/:keyword" element={<SearchResults />} />
                 <Route path="/gif/:id" element={<Detail />} />
+                <Route path="*" element={<h1>Error 404</h1>} />
               </Routes>
             </GifsContextProvider>
           </section>
