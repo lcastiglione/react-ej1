@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import debounce from "just-debounce-it";
 import ListOfGifs from "components/ListOfGifs";
 import Spinner from "components/Spinner";
 import useGifs from "hooks/useGifs";
 import useNearScreen from "hooks/useNearScreen";
+import SearchForm from "components/SearchForm";
 import useSEO from "hooks/useSEO";
 
 export default function SearchResults() {
@@ -16,7 +18,7 @@ export default function SearchResults() {
     once: false,
   });
   const title = gifs ? `${gifs.length} resultados de ${keyword}` : "";
-  useSEO({ title });
+  //useSEO({ title });
 
   /*
   Infinit scroll
@@ -39,11 +41,20 @@ export default function SearchResults() {
         <Spinner />
       ) : (
         <>
-          <h3 className="App-title">{decodeURI(keyword)}</h3>
-          <ListOfGifs gifs={gifs} />
+          <Helmet>
+            <title>{title}</title>
+            <meta name="description" content={title} />
+          </Helmet>
+          <header class="o-header">
+            <SearchForm />
+          </header>
+          <div className="App-wrapper">
+            <h3 className="App-title">{decodeURI(keyword)}</h3>
+            <ListOfGifs gifs={gifs} />
+            <div id="visor" ref={externalRef}></div>
+          </div>
         </>
       )}
-      <div id="visor" ref={externalRef}></div>
     </>
   );
 }

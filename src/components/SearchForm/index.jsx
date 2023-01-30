@@ -1,15 +1,24 @@
 ﻿import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function SearchForm({ onSubmit }) {
+const RATINGS = ["g", "pg", "pg-13", "r"];
+
+function SearchForm() {
   const [keyword, setKeyword] = useState("");
+  const [rating, setRating] = useState(RATINGS[0]);
+  const navigate = useNavigate();
 
   const hundleSubmit = (evt) => {
     evt.preventDefault();
-    onSubmit({ keyword });
+    navigate(`/search/${keyword}/${rating}`, { replace: true });
   };
 
   const hundleChange = (evt) => {
     setKeyword(evt.target.value);
+  };
+
+  const handleChangeRating = (evt) => {
+    setRating(evt.target.value);
   };
 
   return (
@@ -21,6 +30,12 @@ function SearchForm({ onSubmit }) {
         type="text"
         value={keyword}
       />
+      <select value={rating} onChange={handleChangeRating}>
+        <option disable>Rating type</option>
+        {RATINGS.map((rating) => (
+          <option key={rating}>{rating}</option>
+        ))}
+      </select>
     </form>
   );
 }

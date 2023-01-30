@@ -24,7 +24,10 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/search/" element={<SearchResults />} />
-                <Route path="/search/:keyword" element={<SearchResults />} />
+                <Route
+                  path="/search/:keyword/:rating?"
+                  element={<SearchResults />}
+                />
                 <Route path="/gif/:id" element={<Detail />} />
                 <Route path="*" element={<h1>Error 404</h1>} />
               </Routes>
