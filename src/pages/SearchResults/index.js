@@ -5,6 +5,7 @@ import ListOfGifs from "components/ListOfGifs";
 import Spinner from "components/Spinner";
 import useGifs from "hooks/useGifs";
 import useNearScreen from "hooks/useNearScreen";
+import useSEO from "hooks/useSEO";
 
 export default function SearchResults() {
   const { keyword } = useParams();
@@ -14,6 +15,8 @@ export default function SearchResults() {
     externalRef: loading ? null : externalRef,
     once: false,
   });
+  const title = gifs ? `${gifs.length} resultados de ${keyword}` : "";
+  useSEO({ title });
 
   /*
   Infinit scroll
