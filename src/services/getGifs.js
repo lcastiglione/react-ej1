@@ -2,10 +2,6 @@
 // Parámetros para la consulta a la API de gifs
 const body = {
   api_key: process.env.REACT_APP_API_GIPHY_KEY,
-  q: "", // Palabra a buscar
-  limit: "5", //Cantidad de respuestas a devolver
-  offset: 0,
-  rating: "g", // Calificación de edad
   lang: "en", //Idioma
 };
 
@@ -37,12 +33,16 @@ export default async function getGifs({
   keyword = "",
   limit = 5,
   page = 0,
+  rating = "g",
 } = {}) {
-  body["q"] = keyword;
-  body["limit"] = limit;
-  body["offset"] = page * limit;
   const response = await fetch(
-    `${API_URL}/gifs/search?${objToQueryString(body)}`
+    `${API_URL}/gifs/search?${objToQueryString({
+      ...body,
+      q: keyword,
+      limit,
+      page,
+      rating,
+    })}`
   );
   const response_1 = await response.json();
   return fromApiResponseToGifs(response_1);
