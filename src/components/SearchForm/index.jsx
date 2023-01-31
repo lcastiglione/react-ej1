@@ -4,7 +4,7 @@ import useForm from "./hook";
 
 const RATINGS = ["g", "pg", "pg-13", "r"];
 
-function SearchForm({ initialKeyword = "", initialRating = "g" }) {
+function SearchForm({ initialKeyword = "", initialRating = "g" } = null) {
   const { keyword, times, rating, updateKeyword, updateRating } = useForm({
     initialKeyword,
     initialRating,

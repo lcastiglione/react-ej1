@@ -13,7 +13,7 @@ export default function Home() {
         <title>App Gif</title>
         <meta name="description" content="App Gif" />
       </Helmet>
-      <header class="o-header">
+      <header className="o-header">
         <SearchForm />
       </header>
       <div className="App-wrapper">
