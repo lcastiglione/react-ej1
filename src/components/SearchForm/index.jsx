@@ -1,31 +1,19 @@
-﻿import React, { useState, useReducer } from "react";
+﻿import React from "react";
 import { useNavigate } from "react-router-dom";
+import useForm from "./hook";
 
 const RATINGS = ["g", "pg", "pg-13", "r"];
-const reducer = (state, param) => {
-  return state;
-};
 
-function SearchForm({ initialKeyword = "", initialRating }) {
-  //const [keyword, setKeyword] = useState(decodeURIComponent(initialKeyword));
-  const [rating, setRating] = useState(decodeURIComponent(initialRating));
-  //const [times, setTimes] = useState(0);
-  const navigate = useNavigate();
-
-  const [state, dispatch] = useReducer(reducer, {
-    keyword: decodeURIComponent(initialKeyword),
-    times: decodeURIComponent(initialRating),
+function SearchForm({ initialKeyword = "", initialRating = "g" }) {
+  const { keyword, times, rating, updateKeyword, updateRating } = useForm({
+    initialKeyword,
+    initialRating,
   });
-
-  const { keyword, times } = state;
+  const navigate = useNavigate();
 
   const hundleSubmit = (evt) => {
     evt.preventDefault();
     navigate(`/search/${keyword}/${rating}`, { replace: true });
-  };
-
-  const updateKeyword = (keyword) => {
-    dispatch(keyword);
   };
 
   const hundleChange = (evt) => {
@@ -33,7 +21,7 @@ function SearchForm({ initialKeyword = "", initialRating }) {
   };
 
   const handleChangeRating = (evt) => {
-    setRating(evt.target.value);
+    updateRating(evt.target.value);
   };
 
   return (
