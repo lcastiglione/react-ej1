@@ -1,12 +1,14 @@
 ﻿const ENDPOINT = "https://deno-api-users-login.herokuapp.com";
 
-let favs = [];
+const FAVS = [];
 
 export default function addFav({ id, jwt }) {
   return new Promise((resolve, reject) => {
     if (jwt === "token ok") {
-      favs.push(id);
-      resolve(favs);
+      if (!FAVS.includes(id)) {
+        FAVS.push(id);
+      }
+      resolve([...FAVS]);
     } else {
       reject(new Error("Response is NOT ok"));
     }

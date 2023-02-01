@@ -40,6 +40,7 @@ export default function useUser() {
     window.sessionStorage.removeItem("jwt");
     setJWT(null);
   }, [setJWT]);
+
   return {
     addFav,
     favs,

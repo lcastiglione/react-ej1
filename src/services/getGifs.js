@@ -35,15 +35,14 @@ export default async function getGifs({
   page = 0,
   rating = "g",
 } = {}) {
-  const response = await fetch(
-    `${API_URL}/gifs/search?${objToQueryString({
-      ...body,
-      q: keyword,
-      limit,
-      page,
-      rating,
-    })}`
-  );
+  const url = `${API_URL}/gifs/search?${objToQueryString({
+    ...body,
+    q: keyword,
+    limit,
+    page,
+    rating,
+  })}`;
+  const response = await fetch(url);
   const response_1 = await response.json();
   return fromApiResponseToGifs(response_1);
 }
