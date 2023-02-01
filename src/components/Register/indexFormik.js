@@ -37,6 +37,7 @@ export default function Register() {
   }
 
   const handleSubmit = (values, { setFieldError }) => {
+    console.log("submit");
     return register(values)
       .then(() => {
         setRegistered(true);

@@ -1,8 +1,10 @@
-﻿const ENDPOINT = "https://deno-api-users-login.herokuapp.com";
+﻿import { USERS } from "./register";
+
+const ENDPOINT = "https://deno-api-users-login.herokuapp.com";
 
 export default function login({ username, password }) {
   return new Promise((resolve, reject) => {
-    if ((username === "admin" || username === "user") && password === "1234") {
+    if (USERS.find((el) => el === username) && password === "1234") {
       resolve("token ok");
     } else {
       reject(new Error("Response is NOT ok"));

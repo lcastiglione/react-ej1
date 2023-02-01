@@ -1,12 +1,20 @@
 ﻿const ENDPOINT = "https://deno-api-users-login.herokuapp.com";
 
-export default function register({ username }) {
-  console.log(username);
+export const USERS = ["admin", "pepe"];
+
+export default function register({ username, password }) {
   return new Promise((resolve, reject) => {
-    if (username && username !== "admin") {
+    if (password !== "1234") {
+      reject(new Error(`Password not valid`));
+      return;
+    }
+    if (username && USERS.every((user) => user !== username)) {
+      USERS.push(username);
       resolve(true);
     } else {
-      reject(new Error("Usuario no valido"));
+      reject(
+        new Error(`An account is already registered with user '${username}'`)
+      );
     }
   });
 }

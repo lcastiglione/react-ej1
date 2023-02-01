@@ -34,3 +34,10 @@
   .form .btn {
     width: 100%;
   }
+
+  .form-credential-error{
+    color: red;
+    font-size: 20px;
+    margin-top: 12px;
+    display: block;
+  }
