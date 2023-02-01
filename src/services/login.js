@@ -2,7 +2,7 @@
 
 export default function login({ username, password }) {
   return new Promise((resolve, reject) => {
-    if (username === "admin" && password === "1234") {
+    if ((username === "admin" || username === "user") && password === "1234") {
       resolve("token ok");
     } else {
       reject(new Error("Response is NOT ok"));

@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 
 import Header from "components/Header";
 import Login from "pages/Login";
+import Register from "pages/Register";
 import SearchResults from "pages/SearchResults";
 import Detail from "pages/Detail";
 import { UserContextProvider } from "contexts/UserContext";
@@ -27,6 +28,7 @@ export default function App() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
                   <Route path="/search/" element={<SearchResults />} />
                   <Route
                     path="/search/:keyword/:rating?"
