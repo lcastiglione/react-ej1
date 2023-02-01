@@ -4,7 +4,9 @@ import useForm from "./hook";
 
 const RATINGS = ["g", "pg", "pg-13", "r"];
 
-function SearchForm({ initialKeyword = "", initialRating = "g" } = null) {
+export default function SearchForm(
+  { initialKeyword = "", initialRating = "g" } = null
+) {
   const { keyword, times, rating, updateKeyword, updateRating } = useForm({
     initialKeyword,
     initialRating,
@@ -43,5 +45,3 @@ function SearchForm({ initialKeyword = "", initialRating = "g" } = null) {
     </form>
   );
 }
-
-export default React.memo(SearchForm);

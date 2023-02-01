@@ -1,10 +1,16 @@
 ﻿import React from "react";
-import "./gif.css";
 import { Link } from "react-router-dom";
 
-function Gif({ title, id, url }) {
+import Fav from "components/Fav";
+
+import "./gif.css";
+
+export default function Gif({ title, id, url }) {
   return (
     <div className="gif">
+      <div className="gif-buttons">
+        <Fav id={id} />
+      </div>
       <Link to={`/gif/${id}`} className="gif-link">
         <h4>{title}</h4>
         <img loading="lazy" alt={title} src={url} />
@@ -12,7 +18,3 @@ function Gif({ title, id, url }) {
     </div>
   );
 }
-
-export default React.memo(Gif, (prevProps, nextProps) => {
-  return prevProps.id === nextProps.id;
-});
