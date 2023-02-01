@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 //import { useRoutes } from "react-router-dom";
 import useUser from "hooks/useUser";
 
@@ -7,7 +7,11 @@ import "./Header.css";
 
 export default function Header() {
   const { isLogged, logout } = useUser();
-  //const [match] = useRoutes("/login");
+  /*
+  Si no se está en el path '/login' devuleve null,
+  sino devuelve un objeto con datos de la url
+  */
+  const match = useMatch("/login");
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -27,8 +31,7 @@ export default function Header() {
     );
   };
 
-  //const content = match ? null : renderLoginButtons({ isLogged });
+  const content = match ? null : renderLoginButtons({ isLogged });
 
-  //return <header className="gf-header">{content}</header>;
-  return renderLoginButtons({ isLogged });
+  return <header className="gf-header">{content}</header>;
 }
