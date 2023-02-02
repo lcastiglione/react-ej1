@@ -1,5 +1,4 @@
 ﻿import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Modal from "components/Modal";
 import Login from "components/Login";
 import useUser from "hooks/useUser";
@@ -8,7 +7,6 @@ import "./Fav.css";
 
 export default function Fav({ id }) {
   const { isLogged, addFav, favs } = useUser();
-  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {

@@ -4,7 +4,7 @@ import loginService from "services/login";
 import addFavService from "services/addFav";
 
 export default function useUser() {
-  const { favs, jwt, setFavs, setJWT } = useContext(Context);
+  const { favs, jwt, setFavs, setJWT, user, setUser } = useContext(Context);
   const [state, setState] = useState({ loading: false, error: false });
 
   const login = useCallback(
@@ -15,14 +15,17 @@ export default function useUser() {
           window.sessionStorage.setItem("jwt", jwt);
           setState({ loading: false, error: false });
           setJWT(jwt);
+          setUser(username);
+          window.sessionStorage.setItem("user", username);
         })
         .catch((err) => {
           window.sessionStorage.removeItem("jwt");
+          window.sessionStorage.removeItem("user");
           setState({ loading: false, error: true });
           console.error(err);
         });
     },
-    [setJWT]
+    [setJWT, setUser]
   );
 
   const addFav = useCallback(
@@ -38,10 +41,12 @@ export default function useUser() {
 
   const logout = useCallback(() => {
     window.sessionStorage.removeItem("jwt");
+    window.sessionStorage.removeItem("user");
     setJWT(null);
   }, [setJWT]);
 
   return {
+    user,
     addFav,
     favs,
     isLogged: Boolean(jwt),

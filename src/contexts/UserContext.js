@@ -5,6 +5,7 @@ const Context = React.createContext({});
 
 export function UserContextProvider({ children }) {
   const [favs, setFavs] = useState([]);
+  const [user, setUser] = useState(() => window.sessionStorage.getItem("user"));
   const [jwt, setJWT] = useState(() => window.sessionStorage.getItem("jwt"));
 
   useEffect(() => {
@@ -19,6 +20,8 @@ export function UserContextProvider({ children }) {
         jwt,
         setFavs,
         setJWT,
+        user,
+        setUser,
       }}
     >
       {children}

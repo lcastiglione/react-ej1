@@ -16,3 +16,9 @@
   .gf-header a + a {
     margin: 0 12px;
   }
+
+  .user{
+    margin:-2px 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }

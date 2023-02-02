@@ -6,7 +6,7 @@ import useUser from "hooks/useUser";
 import "./Header.css";
 
 export default function Header() {
-  const { isLogged, logout } = useUser();
+  const { isLogged, logout, user } = useUser();
   /*
   Si no se está en el path '/login' devuleve null,
   sino devuelve un objeto con datos de la url
@@ -20,9 +20,12 @@ export default function Header() {
 
   const renderLoginButtons = ({ isLogged }) => {
     return isLogged ? (
-      <Link to="" onClick={handleClick}>
-        Logout
-      </Link>
+      <>
+        <p className="user">{user}</p>
+        <Link to="" onClick={handleClick}>
+          Logout
+        </Link>
+      </>
     ) : (
       <>
         <Link to="/login">Login</Link>
