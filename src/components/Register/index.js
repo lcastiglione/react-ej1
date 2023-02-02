@@ -1,8 +1,9 @@
-﻿import React, { useState, useEffect, useCallback } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import registerService from "services/register";
 import useUser from "hooks/useUser";
-import { useForm } from "react-hook-form";
 
 const initialValues = { username: "", password: "" };
 
@@ -24,25 +25,6 @@ export default function Register() {
       navigate("/");
     }
   }, [isLogged, navigate, setRegistered]);
-
-  const getMessageError = (name) => {
-    if ("username" === name) {
-      return errors.username.message || "Required username";
-    }
-    if ("password" === name) {
-      switch (errors.password?.type) {
-        case "required":
-          return "Required password";
-        case "minLength":
-          return errors.password.message || "Length must be greater than 3";
-        default:
-          return;
-      }
-    }
-    if ("credentials" === name) {
-      return errors.credentials.message || "Credentials error";
-    }
-  };
 
   if (registered) {
     return <h4>Usuario registrado con éxito!</h4>;
@@ -68,24 +50,23 @@ export default function Register() {
           className={errors.username ? "error" : ""}
           defaultValue="Usuario"
           {...register("username", {
-            required: true,
+            required: "Required username",
           })}
         ></input>
-        {errors.username?.type && (
-          <small className="form-error">{getMessageError("username")}</small>
-        )}
+        <ErrorMessage errors={errors} name="username" as="small" />
         <input
           className={errors.password ? "error" : ""}
           defaultValue="Contraseña"
           type="password"
           {...register("password", {
-            required: true,
-            minLength: 3,
+            required: "Required password",
+            minLength: {
+              value: 3,
+              message: "Length must be greater than 3", // JS only: <p>error message</p> TS only support string
+            },
           })}
         ></input>
-        {errors.password?.type && (
-          <small className="form-error">{getMessageError("password")}</small>
-        )}
+        <ErrorMessage errors={errors} name="password" as="small" />
         <button className="btn" disabled={isSubmitting}>
           Registrarse
         </button>
